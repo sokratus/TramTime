@@ -107,36 +107,42 @@ function App() {
         ) : (
           filteredDepartures.map((departure, index) => (
             <div key={index} className={`p-4 mb-4 rounded-lg border ${new Date(departure.when).getTime() < now.getTime() ? 'bg-gray-50 border-gray-200' : 'bg-white border-gray-300'}`}>
-              <div className="flex justify-between items-center mb-2">
-                <h2 className="text-xl font-semibold text-primary">Tram {departure.line.name}</h2>
-                <h3 className="text-gray-600">{departure.direction}</h3>
+              <div className="flex justify-between items-center">
+                <div>
+                  <h2 className="text-xl font-semibold text-primary">Tram {departure.line.name}</h2>
+                  <h3 className="text-gray-600 text-sm">{departure.direction}</h3>
+                </div>
+                <div className="text-right">
+                  <span className="text-lg font-medium text-gray-800">
+                    {(() => {
+                      const departureTime = new Date(departure.when);
+                      const diffMs = departureTime.getTime() - now.getTime();
+                      const diffMinutes = Math.floor(
+                        Math.abs(diffMs) / (1000 * 60)
+                      );
+                      const diffSeconds = Math.floor(
+                        (Math.abs(diffMs) % (1000 * 60)) / 1000
+                      );
+                      const hours = departureTime
+                        .getHours()
+                        .toString()
+                        .padStart(2, "0");
+                      const minutes = departureTime
+                        .getMinutes()
+                        .toString()
+                        .padStart(2, "0");
+                      const isPast = diffMs < 0;
+                      return `${isPast ? "" : "In "}${diffMinutes}m ${diffSeconds}s${isPast ? " ago" : ""}`;
+                    })()}
+                  </span>
+                  <div className="text-sm text-gray-500">
+                    {(() => {
+                      const departureTime = new Date(departure.when);
+                      return `${departureTime.getHours().toString().padStart(2, "0")}:${departureTime.getMinutes().toString().padStart(2, "0")}`;
+                    })()}
+                  </div>
+                </div>
               </div>
-              <span className="text-sm text-gray-500">
-                {(() => {
-                  const departureTime = new Date(departure.when);
-                  const diffMs = departureTime.getTime() - now.getTime();
-                  const diffMinutes = Math.floor(
-                    Math.abs(diffMs) / (1000 * 60)
-                  );
-                  const diffSeconds = Math.floor(
-                    (Math.abs(diffMs) % (1000 * 60)) / 1000
-                  );
-                  const hours = departureTime
-                    .getHours()
-                    .toString()
-                    .padStart(2, "0");
-                  const minutes = departureTime
-                    .getMinutes()
-                    .toString()
-                    .padStart(2, "0");
-                  const isPast = diffMs < 0;
-                  return `${
-                    isPast ? "" : "In "
-                  }${diffMinutes}m ${diffSeconds}s${
-                    isPast ? " ago" : ""
-                  } (${hours}:${minutes})`;
-                })()}
-              </span>
             </div>
           ))
         )}
