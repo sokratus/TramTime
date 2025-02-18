@@ -113,26 +113,23 @@ function App() {
                   <h3 className="text-gray-600 text-sm">{departure.direction}</h3>
                 </div>
                 <div className="text-right">
-                  <span className="text-lg font-medium text-gray-800">
-                    {(() => {
-                      const departureTime = new Date(departure.when);
-                      const diffMs = departureTime.getTime() - now.getTime();
-                      const diffMinutes = Math.floor(
-                        Math.abs(diffMs) / (1000 * 60)
-                      );
-                      const diffSeconds = Math.floor(
-                        (Math.abs(diffMs) % (1000 * 60)) / 1000
-                      );
-                      const isPast = diffMs < 0;
-                      return `${isPast ? "" : "In "}${diffMinutes}m ${diffSeconds}s${isPast ? " ago" : ""}`;
-                    })()}
-                  </span>
-                  <div className="text-sm text-gray-500">
-                    {(() => {
-                      const departureTime = new Date(departure.when);
-                      return `${departureTime.getHours().toString().padStart(2, "0")}:${departureTime.getMinutes().toString().padStart(2, "0")}`;
-                    })()}
-                  </div>
+                  {(() => {
+                    const departureTime = new Date(departure.when);
+                    const diffMs = departureTime.getTime() - now.getTime();
+                    const diffMinutes = Math.floor(Math.abs(diffMs) / (1000 * 60));
+                    const diffSeconds = Math.floor((Math.abs(diffMs) % (1000 * 60)) / 1000);
+                    const isPast = diffMs < 0;
+                    return (
+                      <>
+                        <span className={`text-lg font-medium ${diffMinutes < 5 ? 'text-red-600' : 'text-gray-800'}`}>
+                          {`${isPast ? "" : "In "}${diffMinutes}m ${diffSeconds}s${isPast ? " ago" : ""}`}
+                        </span>
+                        <div className="text-sm text-gray-500">
+                          {`${departureTime.getHours().toString().padStart(2, "0")}:${departureTime.getMinutes().toString().padStart(2, "0")}`}
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
             </div>
