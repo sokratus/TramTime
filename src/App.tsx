@@ -123,14 +123,6 @@ function App() {
                       const diffSeconds = Math.floor(
                         (Math.abs(diffMs) % (1000 * 60)) / 1000
                       );
-                      const hours = departureTime
-                        .getHours()
-                        .toString()
-                        .padStart(2, "0");
-                      const minutes = departureTime
-                        .getMinutes()
-                        .toString()
-                        .padStart(2, "0");
                       const isPast = diffMs < 0;
                       return `${isPast ? "" : "In "}${diffMinutes}m ${diffSeconds}s${isPast ? " ago" : ""}`;
                     })()}
