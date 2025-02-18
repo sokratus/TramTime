@@ -8,6 +8,24 @@
   status = 200
   force = true
 
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "frame-ancestors 'none'"
+    Permissions-Policy = "browsing-topics=()"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "text/javascript"
+
+[[headers]]
+  for = "/assets/*.js"
+  [headers.values]
+    Content-Type = "text/javascript"
+
 [build.environment]
   NODE_VERSION = "18"
 
