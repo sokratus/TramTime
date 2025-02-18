@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .app {
+    @apply max-w-4xl mx-auto p-4 md:p-6 font-sans;
+  }
+
+  .tabs {
+    @apply flex justify-center gap-4 mb-8 p-4;
+  }
+
+  .tab {
+    @apply px-6 py-3 bg-gradient-to-b from-white to-secondary-light border border-secondary
+           rounded-lg cursor-pointer text-base font-medium text-secondary-dark
+           transition-all duration-300 shadow-soft hover:shadow-hover hover:-translate-y-0.5
+           hover:bg-gradient-to-b hover:from-secondary-light hover:to-secondary
+           md:text-lg;
+  }
+
+  .tab.active {
+    @apply bg-gradient-to-br from-primary to-primary-dark text-white border-primary
+           shadow-lg hover:from-primary hover:to-primary-dark;
+  }
+
+  h1 {
+    @apply text-2xl md:text-3xl text-gray-800 text-center mb-8 font-bold;
+  }
+
+  .departures {
+    @apply bg-gray-50 rounded-xl p-4 md:p-6 mb-6;
+  }
+
+  .departure-item {
+    @apply flex justify-between items-center p-4 border-b border-gray-200 last:border-0;
+  }
+
+  .departure-header {
+    @apply flex flex-col gap-1;
+  }
+
+  .tram-number {
+    @apply text-xl md:text-2xl font-bold text-gray-800 m-0;
+  }
+
+  .destination {
+    @apply text-sm md:text-base text-gray-600 font-normal m-0;
+  }
+
+  .time {
+    @apply font-semibold text-gray-800 text-sm md:text-base;
+  }
+
+  .error {
+    @apply text-red-600 text-center p-5 bg-red-50 rounded-lg my-5;
+  }
+
+  button {
+    @apply block mx-auto px-6 py-3 bg-primary-light text-white border-0 rounded-lg
+           cursor-pointer text-base hover:bg-primary transition-colors duration-200;
+  }
+}
