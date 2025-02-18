@@ -60,16 +60,16 @@ function App() {
 
   if (loading) {
     return (
-      <div className="app">
-        <div>Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-lg text-gray-600">Loading...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="app">
-        <div className="error">{error}</div>
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-red-600 p-4 rounded-lg bg-red-50 border border-red-200">{error}</div>
       </div>
     );
   }
@@ -85,15 +85,15 @@ function App() {
       <h1 className="text-2xl md:text-3xl text-gray-800 text-center mb-8 font-bold">
         Next Tram from Forckenbeckplatz
       </h1>
-      <div className="tabs">
+      <div className="flex justify-center gap-4 mb-6">
         <button
-          className={`tab ${activeTab === "lidl" ? "active" : ""}`}
+          className={`px-4 py-2 rounded-lg transition-colors duration-200 ${activeTab === "lidl" ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
           onClick={() => setActiveTab("lidl")}
         >
           Towards Lidl
         </button>
         <button
-          className={`tab ${activeTab === "frankfurter" ? "active" : ""}`}
+          className={`px-4 py-2 rounded-lg transition-colors duration-200 ${activeTab === "frankfurter" ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
           onClick={() => setActiveTab("frankfurter")}
         >
           Towards Frankfurter Tor
@@ -106,12 +106,12 @@ function App() {
           </p>
         ) : (
           filteredDepartures.map((departure, index) => (
-            <div key={index} className={`departure-item ${new Date(departure.when).getTime() < now.getTime() ? 'past' : ''}`}>
-              <div className="departure-header">
-                <h2 className="tram-number">Tram {departure.line.name}</h2>
-                <h3 className="destination">{departure.direction}</h3>
+            <div key={index} className={`p-4 mb-4 rounded-lg border ${new Date(departure.when).getTime() < now.getTime() ? 'bg-gray-50 border-gray-200' : 'bg-white border-gray-300'}`}>
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-xl font-semibold text-primary">Tram {departure.line.name}</h2>
+                <h3 className="text-gray-600">{departure.direction}</h3>
               </div>
-              <span className="time">
+              <span className="text-sm text-gray-500">
                 {(() => {
                   const departureTime = new Date(departure.when);
                   const diffMs = departureTime.getTime() - now.getTime();
