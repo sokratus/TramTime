@@ -7,11 +7,20 @@ export default defineConfig({
   server: {
     port: 5173
   },
+  base: './',
   build: {
     outDir: 'dist',
-    assetsDir: 'assets'
+    assetsDir: 'assets',
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'axios']
+        }
+      }
+    }
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'axios']
   }
-})
+}
