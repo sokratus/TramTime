@@ -36,6 +36,10 @@
     @apply flex justify-between items-center p-4 border-b border-gray-200 last:border-0;
   }
 
+  .departure-item.past {
+    @apply opacity-50;
+  }
+
   .departure-header {
     @apply flex flex-col gap-1;
   }

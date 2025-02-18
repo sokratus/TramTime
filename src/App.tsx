@@ -106,7 +106,7 @@ function App() {
           </p>
         ) : (
           filteredDepartures.map((departure, index) => (
-            <div key={index} className="departure-item">
+            <div key={index} className={`departure-item ${new Date(departure.when).getTime() < now.getTime() ? 'past' : ''}`}>
               <div className="departure-header">
                 <h2 className="tram-number">Tram {departure.line.name}</h2>
                 <h3 className="destination">{departure.direction}</h3>
