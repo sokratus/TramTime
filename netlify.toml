@@ -14,17 +14,16 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     Content-Security-Policy = "frame-ancestors 'none'"
-    Permissions-Policy = "browsing-topics=()"
 
 [[headers]]
   for = "/*.js"
   [headers.values]
-    Content-Type = "text/javascript"
+    Content-Type = "application/javascript"
 
 [[headers]]
   for = "/assets/*.js"
   [headers.values]
-    Content-Type = "text/javascript"
+    Content-Type = "application/javascript"
 
 [build.environment]
   NODE_VERSION = "18"
